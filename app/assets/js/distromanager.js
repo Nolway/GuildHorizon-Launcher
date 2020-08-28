@@ -324,7 +324,9 @@ class Server {
     static fromJSON(json){
 
         const mdls = json.modules
+        this.ignoredFiles = json.ignoredFiles;
         json.modules = []
+        json.ignoredFiles = []
 
         const serv = Object.assign(new Server(), json)
         serv._resolveModules(mdls)
@@ -411,6 +413,13 @@ class Server {
      */
     getModules(){
         return this.modules
+    }
+
+    /**
+     * @returns {Array.<IgnoredFile>} An array of file ignored for this server.
+     */
+    getIgnoredFiles(){
+        return this.ignoredFiles
     }
 
 }

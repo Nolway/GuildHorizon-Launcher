@@ -326,10 +326,14 @@ class ProcessBuilder {
         args.push('-Djava.library.path=' + tempNativePath)
 
         // Main Java Class
-        args.push(this.forgeData.mainClass)
-
-        // Forge Arguments
-        args = args.concat(this._resolveForgeArgs())
+        if (this.forgeData) {
+            // Forge Arguments
+            args.push(this.forgeData.mainClass)
+            args = args.concat(this._resolveForgeArgs())
+        } else {
+            // Vanilla Arguments
+            args.push(this.versionData.mainClass)
+        }
 
         return args
     }
@@ -363,7 +367,13 @@ class ProcessBuilder {
         args = args.concat(ConfigManager.getJVMOptions())
 
         // Main Java Class
-        args.push(this.forgeData.mainClass)
+        if (this.forgeData) {
+            // Forge
+            args.push(this.forgeData.mainClass)
+        } else {
+            // Vanilla
+            args.push(this.versionData.mainClass)
+        }
 
         // Vanilla Arguments
         args = args.concat(this.versionData.arguments.game)
@@ -474,25 +484,28 @@ class ProcessBuilder {
         }
 
         // Autoconnect
-        let isAutoconnectBroken
-        try {
-            isAutoconnectBroken = Util.isAutoconnectBroken(this.forgeData.id.split('-')[2])
-        } catch(err) {
-            logger.error(err)
-            logger.error('Forge version format changed.. assuming autoconnect works.')
-            logger.debug('Forge version:', this.forgeData.id)
-        }
-
-        if(isAutoconnectBroken) {
-            logger.error('Server autoconnect disabled on Forge 1.15.2 for builds earlier than 31.2.15 due to OpenGL Stack Overflow issue.')
-            logger.error('Please upgrade your Forge version to at least 31.2.15!')
+        if (this.forgeData) {
+            let isAutoconnectBroken
+            try {
+                isAutoconnectBroken = Util.isAutoconnectBroken(this.forgeData.id.split('-')[2])
+            } catch(err) {
+                logger.error(err)
+                logger.error('Forge version format changed.. assuming autoconnect works.')
+                logger.debug('Forge version:', this.forgeData.id)
+            }
+    
+            if(isAutoconnectBroken) {
+                logger.error('Server autoconnect disabled on Forge 1.15.2 for builds earlier than 31.2.15 due to OpenGL Stack Overflow issue.')
+                logger.error('Please upgrade your Forge version to at least 31.2.15!')
+            } else {
+                this._processAutoConnectArg(args)
+            }
+            
+            // Forge Specific Arguments
+            args = args.concat(this.forgeData.arguments.game)
         } else {
             this._processAutoConnectArg(args)
         }
-        
-
-        // Forge Specific Arguments
-        args = args.concat(this.forgeData.arguments.game)
 
         // Filter null values
         args = args.filter(arg => {
@@ -570,11 +583,13 @@ class ProcessBuilder {
         }
         
         // Mod List File Argument
-        mcArgs.push('--modListFile')
-        if(this._lteMinorVersion(9)) {
-            mcArgs.push(path.basename(this.fmlDir))
-        } else {
-            mcArgs.push('absolute:' + this.fmlDir)
+        if (this.forgeData) {
+            mcArgs.push('--modListFile')
+            if(this._lteMinorVersion(9)) {
+                mcArgs.push(path.basename(this.fmlDir))
+            } else {
+                mcArgs.push('absolute:' + this.fmlDir)
+            }
         }
         
 

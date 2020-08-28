@@ -1202,7 +1202,8 @@ class AssetGuard extends EventEmitter {
      */
     _getVersionDataUrl(version){
         return new Promise((resolve, reject) => {
-            request('https://launchermeta.mojang.com/mc/game/version_manifest.json', (error, resp, body) => {
+            // request('https://launchermeta.mojang.com/mc/game/version_manifest.json', (error, resp, body) => {
+            request('https://launcher.guildhorizon.fr/version_manifest.json', (error, resp, body) => {
                 if(error){
                     reject(error)
                 } else {
@@ -1292,7 +1293,7 @@ class AssetGuard extends EventEmitter {
         return new Promise((resolve, reject) => {
 
             //Asset constants
-            const resourceURL = 'http://resources.download.minecraft.net/'
+            const resourceURL = 'https://launcher.guildhorizon.fr/assets/objects/'
             const localPath = path.join(self.commonPath, 'assets')
             const objectPath = path.join(localPath, 'objects')
 
@@ -1516,7 +1517,7 @@ class AssetGuard extends EventEmitter {
                     }
                 }
             }
-            reject('No forge module found!')
+            resolve(null)
         })
     }
 

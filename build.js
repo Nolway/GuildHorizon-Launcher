@@ -49,7 +49,7 @@ builder.build({
             maintainer: 'GuildHorizon',
             vendor: 'GuildHorizon',
             synopsis: 'Modded Minecraft Launcher',
-            description: 'Custom launcher which allows users to join modded servers. All mods, configurations, and updates are handled automatically.',
+            description: 'Launcher personnalisé qui permet aux utilisateurs de rejoindre le serveur GuildHorizon. Tous les mods, configurations et mises à jour sont gérés automatiquement.',
             category: 'Game'
         },
         compression: 'maximum',

@@ -42,10 +42,10 @@ if(!isDev){
         switch(arg){
             case 'checking-for-update':
                 loggerAutoUpdater.log('Checking for update..')
-                settingsUpdateButtonStatus('Checking for Updates..', true)
+                settingsUpdateButtonStatus('Vérification des mises à jour..', true)
                 break
             case 'update-available':
-                loggerAutoUpdaterSuccess.log('New update available', info.version)
+                loggerAutoUpdaterSuccess.log('Nouvelle mise à jour disponible', info.version)
                 
                 if(process.platform === 'darwin'){
                     info.darwindownload = `https://github.com/nolway/GuildHorizon-Launcher/releases/download/v${info.version}/ghlauncher-setup-${info.version}.dmg`
@@ -56,7 +56,7 @@ if(!isDev){
                 break
             case 'update-downloaded':
                 loggerAutoUpdaterSuccess.log('Update ' + info.version + ' ready to be installed.')
-                settingsUpdateButtonStatus('Install Now', false, () => {
+                settingsUpdateButtonStatus('Installer maintenant', false, () => {
                     if(!isDev){
                         ipcRenderer.send('autoUpdateAction', 'installUpdateNow')
                     }
@@ -65,7 +65,7 @@ if(!isDev){
                 break
             case 'update-not-available':
                 loggerAutoUpdater.log('No new update found.')
-                settingsUpdateButtonStatus('Check for Updates')
+                settingsUpdateButtonStatus('Vérifier les mises à jour')
                 break
             case 'ready':
                 updateCheckListener = setInterval(() => {
