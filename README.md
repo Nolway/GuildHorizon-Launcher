@@ -1,4 +1,4 @@
-<p align="center"><img src="./app/assets/images/SealCircle.png" width="150px" height="150px" alt="aventium softworks"></p>
+<p align="center"><img src="./app/assets/images/logo.svg" width="150px" height="150px" alt="Guildhorizon"></p>
 
 <h1 align="center">GuildHorizon Launcher</h1>
 

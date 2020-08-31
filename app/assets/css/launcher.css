@@ -271,15 +271,12 @@ body, button {
 }
 */
 
-#welcomeImageSeal {
-    border-radius: 50%;
-    border: 2px solid #cad7e1;
-    background: rgba(1, 2, 1, 0.5);
-    height: 125px;
-    width: 125px;
-    box-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
+#welcomeImage {
+    width: 400px;
     margin-bottom: 5%;
     margin-top: 10%;
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter:         drop-shadow(5px 5px 5px #222); 
 }
 
 #welcomeHeader {
@@ -484,14 +481,12 @@ body, button {
 }
 
 /* Logo on login form. */
-#loginImageSeal {
-    border-radius: 50%;
-    border: 2px solid #cad7e1;
-    background: rgba(1, 2, 1, 0.5);
-    height: 125px;
-    width: 125px;
-    box-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
+#loginImage {
+    height: 104px;
+    width: 250px;
     margin-bottom: 20px;
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter:         drop-shadow(5px 5px 5px #222); 
 }
 
 /* Header on login view. */
@@ -603,6 +598,7 @@ body, button {
 
 /* Remember option text. */
 #loginRememberText {
+    margin-left: 10px;
     padding-right: 10px;
     transition: 0.25s ease;
 }
@@ -2664,43 +2660,39 @@ input:checked + .toggleSwitchSlider:before {
 * * */
 
 /* Logo image. */
-#image_seal {
-    height: 70px;
+#image_update {
+    height: 80px;
     width: auto;
     position: relative;
-    border: 2px solid white;
-    box-sizing: border-box;
-    border-radius: 50%;
+    -webkit-filter: drop-shadow(5px 5px 5px #222);
+    filter:         drop-shadow(5px 5px 5px #222); 
 }
 
 /* Logo container styles. */
-#image_seal_container {
+#image_update_container {
     position: relative;
     height: 70px;
     width: 70px;
-    border-radius: 50%;
     margin-top: 50px;
 }
 
 /* Logo container styles w/ update. */
-#image_seal_container[update]{
+#image_update_container[update]{
     cursor: pointer
 }
-#image_seal_container[update]:before,
-#image_seal_container[update]:after {
+#image_update_container[update]:before,
+#image_update_container[update]:after {
     cursor: pointer;
     position: absolute;
     content: '';
-    height: 100%;
-    width: 100%;
+    height: 70%;
     top: 0%;
     left: 0%;
-    border-radius: 50%;
-    box-shadow: 0 0 15px #43c628;
+    -webkit-filter: drop-shadow(5px 5px 5px #43c628);
+    filter:         drop-shadow(5px 5px 5px #43c628); 
     animation: glow-grow 4s ease-out infinite;
-    background: rgba(0, 0, 0, 0.15);
 }
-#image_seal_container[update]:before {
+#image_update_container[update]:before {
     animation-delay: 2s;
 }
 
@@ -2734,7 +2726,7 @@ input:checked + .toggleSwitchSlider:before {
     border-style: solid;
     border-color: transparent transparent rgb(0, 0, 0) transparent;
 }
-#image_seal_container[update]:hover #updateAvailableTooltip {
+#image_update_container[update]:hover #updateAvailableTooltip {
     visibility: visible;
     opacity: 1;
     transition-delay: 0s;
@@ -3752,13 +3744,26 @@ input:checked + .toggleSwitchSlider:before {
     position: absolute;
     width: 277px;
     height: auto;
+    animation: bounce 1s infinite alternate;
+    -webkit-animation: bounce 1s infinite alternate;
 }
 
-/* Rotating image for the spinner. */
-#loadSpinnerImage {
-    width: 280px;
-    height: auto;
-    z-index: 400;
+@keyframes bounce {
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(-15px);
+    }
+}
+
+@-webkit-keyframes bounce {
+    from {
+        transform: translateY(0px);
+    }
+    to {
+        transform: translateY(-15px);
+    }
 }
 
 /* Rotating animation for the spinner. */
